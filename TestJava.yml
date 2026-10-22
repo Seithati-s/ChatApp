@@ -1,0 +1,23 @@
+name: TestJava
+
+# Runs every unit test whenever code is pushed (any branch) or a pull request is opened
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Run the unit tests
+        run: mvn -B test
